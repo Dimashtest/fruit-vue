@@ -4,52 +4,71 @@ import 'vue3-carousel/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 
 const carouselConfig = {
-  itemsToShow: 1,
-  wrapAround: true,
-  autoplay: 2000,
+    itemsToShow: 1,
+    wrapAround: true,
+    autoplay: 5000,
+
+
 }
 
 const sliderItems = [
     {
         id: 1,
-        title: 'Покупай лучшие фрукты только у нас!',
+        title: 'Покупай лучшие фрукты у нас!',
         description: '№1 в Казахстане',
-        image: '/fruits.svg'
+        image: '/slider.svg'
     },
     {
         id: 2,
         title: 'Самые свежие товары во всем мире!',
-        description: 'Топ 1 в СНГ',
-        image: '/fruits.svg'
+        description: 'Если не веришь попробуй!',
+        image: '/slider.svg'
     },
     {
         id: 3,
-        title: 'Далеко идти не надо, привезут доставкой!',
-        description: 'Никаких конкурентов',
-        image: '/fruits.svg'
+        title: 'Hello',
+        description: 'Hello',
+        image: '/slider.svg'
     },
-    
 ]
+
 </script>
 
 <template>
-  <Carousel v-bind="carouselConfig">
-    <Slide v-for="slide in sliderItems" :key="slide.id">
-        <div class="bg-[#F4EFE9] rounded-[20px] carousel__item h-[400px] w-full mt-[70px] flex justify-between items-center p-[70px]"> 
-            <div class="flex flex-col gap-9">
-                <h2 class="text-[#275B1A] font-bold text-[48px] w-[550px]">{{  slide.title }}</h2>
-                <p class="text-[#C4C4C4] text-[50px]"> {{ slide.description }}</p>
+    <Carousel v-bind="carouselConfig">
+        <Slide v-for="slide in sliderItems" :key="slide.id">
+            <div class="carousel__item bg-[#F4EFE9] w-full flex items-start justify-between p-20 rounded-[20px]">
+                <div class="flex flex-col justify-between">
+                    <h2 class="font-bold mb-4 text-[38px] text-[#275B1A]">{{ slide.title }}</h2>
+                    <p class="text-[38px] font-bold mb-4 text-[#C4C4C4] ">{{ slide.description }}</p>
+                </div>
+                <img :src="slide.image" alt="Не прогружено">
             </div>
-            <img :src="slide.image" alt="">
-        </div>
-    </Slide>
+        </Slide>
 
-    <template #addons>
-        
-      <Navigation />
-    </template>
-  </Carousel>
+        <template #addons>
+            <Navigation />
+            <CarouselNavigation>
+                <template #prev>
+                    <span>←</span>
+                </template>
+                <template #next>
+                    <span>→</span>
+                </template>
+            </CarouselNavigation>
+
+
+        </template>
+    </Carousel>
 </template>
-<style lang="scss" scoped>
 
+<style scoped>
+.carousel {
+    --vc-nav-background: white;
+    --vc-nav-color: #C8C8C8;
+    --vc-nav-color-hover: black;
+    --vc-nav-border-radius: 50%;
+    --vc-nav-width: 40px;
+    --vc-nav-height: 40px;
+}
 </style>
