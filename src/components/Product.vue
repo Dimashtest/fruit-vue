@@ -5,15 +5,15 @@
             <img src="/favorite.svg" alt="">
         </div>
         <img width="180px" height="180px" :src="fruit.image" alt="">
-        <h3 class="text-[18px] ">{{ fruit?.title }}</h3>
+        <h3 class="text-[18px] ">{{ fruit.title }}</h3>
         <div class="flex items-center justify-between w-full">
             <div class="flex flex-col gap-1">
                 <p class="text-[#BDBDBD] text-[16px]">Цена</p>
                 <span class="text-[18px] font-bold">{{ fruit.price }} тг/кг.</span>
             </div>
-            <div class="border-[#D3D3D3] p-2 rounded-[10px] border-[2px] cursor-pointer">
-                <img @click="() => toggleAdd(fruit)" src="/add.svg" alt="">
-
+            <div  @click="$emit('addToCart', fruit)"
+                class="border-[#D3D3D3] p-2 rounded-[10px] border-[2px] cursor-pointer">
+                <img :src="fruit.isAdded ? '/selectTovar.svg' : '/add.svg'" alt="">
             </div>
         </div>
     </div>
@@ -22,7 +22,16 @@
 
 <script setup>
 defineProps({
-    fruit: Object,
-    toggleAdd: Function
+    fruit: Object
 })
+
+defineEmits(['addToCart'])
+
+
+
+// function addToCart(fruit) {
+//     const cartItems = JSON.parse(localStorage.getItem('cart')) || []
+//     cartItems.push(fruit)
+//     localStorage.setItem('cart', JSON.stringify(cartItems))
+// }
 </script>
